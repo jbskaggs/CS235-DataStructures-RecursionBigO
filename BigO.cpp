@@ -2,6 +2,16 @@
 // Created by jskag on 7/2/2022.
 //
 
+#include <iostream>
+#include <fstream>
+#include <sstream>
+#include <string>
+#include <list>
+#include <vector>
+#include <bits/stdc++.h>
+
+using namespace std;
+
 //Choosing an Algorithm
 //Can you have more than one algorithm that solves a given problem?
 
@@ -29,12 +39,14 @@
 //Give a function T(n) for the number of time units used by the code.
 //(Assume each statement uses one time unit.)
 
-
-//double sum = 0;
-//for (int i = 0; i < n; i++)
-//    sum += a[i];
-//double mean = sum / n;
-//return mean;
+double calc_mean(vector<double> a, int n) {
+    double sum = 0;
+    for (int i = 0; i < n; i++){
+        sum += a[i];
+    }
+    double mean = sum / n;
+    return mean;
+}
 
 //Big Oh
 
@@ -124,106 +136,119 @@
 
 //Classwork
 //You may work together with a partner.
+int sampleFunction(double sum, int n, vector<int> a) {
 
-//Give the Big-Oh of the running time for each program fragment.
+    //Give the Big-Oh of the running time for each program fragment.
 
-//for ( int i = 0; i < n; i++ )
-//sum++;
+    for (int i = 0; i < n; i++) {
+        sum++;
+    }
 
-//for ( int i = 0; i < n; i += 2 )
-//sum++;
+    for (int i = 0; i < n; i += 2) {
+        sum++;
+    }
 
-//for ( int i = 0; i < n; i++ )
-//for ( int j = 0; j < n; j++ )
-//sum++;
-//for ( int j = 0; j < n; j++ )
-//sum++;
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            sum++;
+        }
+        for (int j = 0; j < n; j++) {
+            sum++;
+        }
+    }
 
-//for ( int i = 0; i < n; i++ )
-//sum++;
-//for ( int j = 0; j < n; j++ )
-//sum++;
+    for (int i = 0; i < n; i++) {
+        sum++;
+    }
+    for (int j = 0; j < n; j++) {
+        sum++;
+    }
 
-//for ( int i = 0; i < n; i++ )
-//for ( int j = 0; j < n*n; j++ )
-//sum++;
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n * n; j++) {
+            sum++;
+        }
+    }
 
-//for ( int i = 0; i < n; i++ )
-//for ( int j = 0; j < i; j++ )
-//sum++;
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < i; j++) {
+            sum++;
+        }
+    }
 
-//for ( int i = 0; i < n; i++ )
-//for ( int j = 0; j < n*n; j++ )
-//for ( int k = 0; k < j; k++ )
-//sum++;
-
-
-//The inside loop in the following code does not always repeat n times.
-//Does the code have a Big-Oh bound that is smaller than O(n^2)?
-
-//for ( int i = 0; i < n; i++ )
-//for ( int j = 0; j < i; j++ )
-//sum++;
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n * n; j++) {
+            for (int k = 0; k < j; k++) {
+                sum++;
+            }
+        }
+    }
 
 
-//Classwork
-//You may work together with a partner.
+    //The inside loop in the following code does not always repeat n times.
+    //Does the code have a Big-Oh bound that is smaller than O(n^2)?
 
-//What's the BigOh for this algorithm?
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < i; j++) {
+            sum++;
+        }
+    }
 
-//for (i = 0; i < n-1; i++) {
-//small = 1;
-//for (j = i+1; j < n; j++)
-//if (A[j] < A[small])
-//small = j;
-//temp = A[small];
-//A[small] = A[i];
-//A[i] = temp;
-//}
 
-//What are some examples of bad Big-Oh style?
+    //Classwork
+    //You may work together with a partner.
+
+    //What's the BigOh for this algorithm?
+
+    for (int i = 0; i < n - 1; i++) {
+        int small = 0;
+        for (int j = i + 1; j < n; j++)
+            if (a[j] < a[small])
+                small = j;
+        double temp = a[small];
+        a[small] = a[i];
+        a[i] = temp;
+    }
+}
+
+//What are some examples of bad Big-O style?
 //O(2n)
 //O(n + 2)
 //O(n^2 + n)
+double calc_max_seq(vector<double> a, int n){
+    //Classwork
+    //You may work together with a partner.
 
-//Classwork
-//You may work together with a partner.
+    //What's the BigOh for this algorithm?
 
-//What's the BigOh for this algorithm?
+    int maxSum = 0;
+    int seqStart = 0;
+    int seqEnd = 0;
 
-//int maxSum = 0;
+    for( int i = 0; i < n; i++ ) {
+        for (int j = i; j < n; j++) {
+            int thisSum = 0;
 
-//for( int i = 0; i < n; i++ )
-//for( int j = i; j < n; j++ )
-//{
-//int thisSum = 0;
+            for (int k = i; k <= j; k++){
+                thisSum += a[k];
+            }
 
-//for( int k = i; k <= j; k++ )
-//thisSum += a[ k ];
+            for (int k = i; k <= j; k++) {
+                thisSum += 10 + a[k];
+            }
 
-//for( int k = i; k <= j; k++ )
-//thisSum += 10 + a[ k ];
-
-//if( thisSum > maxSum )
-//{
-//maxSum   = thisSum;
-//seqStart = i;
-//seqEnd   = j;
-//}
-//}
-
-
-//for( int k = i; k <= j; k++ )
-//thisSum += a[ k ];
-
-//return maxSum;
-
-
-
-
-
-
-
+            if (thisSum > maxSum) {
+                maxSum = thisSum;
+                seqStart = i;
+                seqEnd = j;
+            }
+            for(int k = i; k <= j; k++){
+                thisSum += a[k];
+            }
+        }
+    }
+    return maxSum;
+}
 
 
 
@@ -448,3 +473,19 @@
 //What's an Average-case bound?
 
 //average time over all inputs of size N
+int main() {
+    int n = 1000;
+    vector<double> a = vector<double>(n, 0);
+
+    srand(15);
+
+    generate(a.begin(), a.end(), rand);
+
+    for (int i = 0; i < n; ++i) {
+        a[i] -= 16000;
+    }
+
+    cout << "the mean of a is " << calc_mean(a, n) << endl;
+    cout << "the mean of a is " << calc_max_seq(a, n) << endl;
+    return 0;
+}

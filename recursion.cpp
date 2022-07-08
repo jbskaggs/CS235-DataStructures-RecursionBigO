@@ -23,14 +23,27 @@ using namespace std;
 //Rewrite sum using recursion.
 
 
-int sum(int n) {
-    int sum = 0;
-    for (int i = 0; i <= n; i++)
-        sum += i;
-    return sum;
-}
+//int sum(int n) {
+//    int sum = 0;
+//    for (int i = 0; i <= n; i++)
+//        sum += i;
+//    return sum;
+//}
 
 //DEMO	(show and run code for sum)
+
+int sum(int n){
+    if(n <= 0)return 0;
+    return 1+sum(n-1);
+}
+
+
+
+
+
+
+
+
 
 //Base Case
 
@@ -39,10 +52,15 @@ int sum(int n) {
 //What happens if you don't have a Base Case?
 
 int sum2(int n) {
-    if (n == 0)
+    if (n == 0) {
         return 0;
-    else
+    }
+    else if (n < 0) {
+        return n + sum2(n + 1);
+    }
+    else {
         return n + sum2(n - 1);
+    }
 }
 
 //DEMO	(run sum without base case)
@@ -116,6 +134,20 @@ int sum4(int n) {
 //3. assume that the recursive call works
 
 
+int fib (int n) {
+    if (n <= 2)
+    {
+        return 1;
+    }
+    return fib(n-2) + fib(n-1);
+}
+
+
+
+
+
+
+
 //When To Use Recursion
 
 //Sum can be implemented using recursion or using a loop (iteration).
@@ -139,6 +171,19 @@ int sum4(int n) {
 //Permute prints all permutations of a string of letters.
 //For example, if permute is given ABC as input
 //it prints ABC, ACB, BAC, BCA, CAB, and CBA.
+
+void per(vector<string> letters, string path = "") {
+    if(letters.size() == 0){
+        cout << path << endl;
+    }
+    for (int i = 0; i < letters.size(); ++i) {
+        vector<string> temp = letters;
+        temp.erase(temp.begin()+i);
+        per(temp, path + letters[i]);
+    }
+}
+
+
 
 //DEMO	(show and run code for permute)
 
@@ -197,9 +242,9 @@ int sum5(int n) {
 
 //Write a recursive method for computing the nth Fibonacci number.
 
-int fib(int n) {
-    return n;
-}
+//int fib(int n) {
+//    return n;
+//}
 
 
 //DEMO	(run fib with n = 5, 6, 7, etc)
@@ -241,9 +286,9 @@ int fib2(int n) {
 //add another base case (either fib(0) = 0 or fib(2) = 1)
 
 int main() {
-    int n = 5;
+    int n = 6;
     cout << endl;
-    cout << "Sum of 0:" << n << " = " << sum(n) << endl;
+    cout << "Sum of 0:" << n << " = " << sum2(n) << endl;
     cout << endl;
     cout << "Fib of " << n << " = " << fib(n);
     cout << endl;
